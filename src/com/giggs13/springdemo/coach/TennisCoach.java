@@ -3,9 +3,14 @@ package com.giggs13.springdemo.coach;
 import com.giggs13.springdemo.fortune.FortuneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 @Component
+@Scope("singleton")
 public class TennisCoach implements Coach {
 
     @Autowired
@@ -15,6 +20,16 @@ public class TennisCoach implements Coach {
 
     public TennisCoach() {
         System.out.println(">>> TennisCoach: inside a default constructor");
+    }
+
+    @PostConstruct
+    private void init() {
+        System.out.println(">>> TennisCoach: inside a init()");
+    }
+
+    @PreDestroy
+    private void destroy() {
+        System.out.println(">>> TennisCoach: inside a destroy()");
     }
 
     /*@Autowired
